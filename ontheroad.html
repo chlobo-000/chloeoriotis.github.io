@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lessons Learned While Working on the Road — Chloe Oriotis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #faf6f0;
+    --blush: #f2e8e0;
+    --sage: #c8d5c0;
+    --sage-deep: #7a9970;
+    --sage-ink: #3a5438;
+    --peach: #e8b49a;
+    --peach-deep: #c97a58;
+    --lilac: #d4c8e0;
+    --lilac-deep: #7a6094;
+    --ink: #1e1c18;
+    --ink-2: #3d3a32;
+    --ink-3: #7a7568;
+    --ink-4: #b0aa9e;
+    --rule: rgba(30,28,24,0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── SITE NAV ── */
+  .site-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 48px;
+    background: var(--sage);
+    border-bottom: 2px solid var(--ink);
+  }
+  .site-nav-back {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--sage-ink);
+    text-decoration: none;
+    transition: letter-spacing .2s;
+  }
+  .site-nav-back:hover { letter-spacing: .22em; }
+  .site-nav-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--sage-ink);
+    text-decoration: none;
+  }
+  .site-nav-name:hover { color: var(--peach-deep); }
+
+  /* ── ARTICLE HEADER ── */
+  .article-header {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 72px 48px 48px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .article-tag-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .article-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 99px;
+  }
+  .tag-essay { background: var(--lilac); color: var(--lilac-deep); }
+  .tag-audio { background: var(--sky, #b8d4d8); color: var(--sky-deep, #4a8a94); }
+
+  /* ── AUDIO PLAYER ── */
+  .audio-section {
+    background: var(--sage);
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    padding: 40px 0;
+  }
+  .audio-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+  .audio-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--sage-ink);
+    opacity: .6;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .audio-eyebrow::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: rgba(58,84,56,.2);
+    max-width: 48px;
+  }
+  .audio-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--sage-ink);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .audio-sub {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--sage-ink);
+    opacity: .7;
+    margin-bottom: 20px;
+  }
+  /* native audio player styled to match */
+  .audio-player {
+    width: 100%;
+    accent-color: var(--peach-deep);
+    margin-bottom: 12px;
+  }
+  /* placeholder shown before audio is uploaded */
+  .audio-placeholder {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border: 1.5px dashed rgba(58,84,56,.3);
+    border-radius: 3px;
+    margin-bottom: 12px;
+  }
+  .audio-placeholder-icon {
+    font-size: 24px;
+    opacity: .4;
+  }
+  .audio-placeholder-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--sage-ink);
+    opacity: .5;
+  }
+  .audio-caption {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--sage-ink);
+    opacity: .4;
+  }
+
+  @media (max-width: 640px) {
+    .audio-inner { padding: 0 24px; }
+  }
+  .article-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.08;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .article-title em {
+    font-style: italic;
+    color: var(--peach-deep);
+  }
+  .article-dek {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--ink-3);
+    margin-bottom: 28px;
+    max-width: 580px;
+  }
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-byline {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+  }
+  .article-byline strong {
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+  .article-dot {
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: var(--ink-4);
+  }
+
+  /* ── ARTICLE BODY ── */
+  .article-body {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 52px 48px 80px;
+  }
+  .article-body p {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--ink-2);
+    margin-bottom: 28px;
+  }
+  .article-body p:last-child { margin-bottom: 0; }
+  .article-body strong { font-weight: 500; color: var(--ink); }
+  .article-body em { font-style: italic; color: var(--ink-3); }
+
+  /* section heading — for the three lessons */
+  .article-body h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 56px 0 20px;
+    line-height: 1.15;
+    padding-top: 48px;
+    border-top: 1px solid var(--rule);
+  }
+  .article-body h2 em {
+    font-style: italic;
+    color: var(--peach-deep);
+  }
+
+  /* section break */
+  .article-body hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 48px 0;
+    width: 80px;
+  }
+
+  /* pull quote */
+  .pull-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3vw, 32px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.35;
+    color: var(--peach-deep);
+    border-left: 3px solid var(--peach);
+    padding: 4px 0 4px 28px;
+    margin: 44px 0;
+  }
+
+  /* inline image */
+  .article-image {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--blush);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 44px 0 16px;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .article-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .article-image-placeholder {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    text-align: center;
+  }
+  .article-image-caption {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 44px;
+    text-align: center;
+  }
+
+  /* cross-reference link */
+  .xref {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--peach-deep);
+    text-decoration: none;
+    border-bottom: 1px solid var(--peach);
+    transition: border-color .2s;
+  }
+  .xref:hover { border-color: var(--peach-deep); }
+
+  /* ── ARTICLE FOOTER ── */
+  .article-footer {
+    background: var(--blush);
+    border-top: 2px solid var(--ink);
+    padding: 52px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .article-footer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 8px;
+  }
+  .article-footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--ink);
+  }
+  .article-footer-name em { font-style: italic; color: var(--peach-deep); }
+  .article-footer-links {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .footer-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .footer-link:hover { color: var(--peach-deep); }
+  .footer-link-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--parchment);
+    background: var(--ink);
+    padding: 8px 18px;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .footer-link-btn:hover { background: var(--peach-deep); }
+
+  /* ── PREV ARTICLE ── */
+  .prev-article {
+    border-top: 1px solid var(--rule);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .prev-article:hover { background: var(--blush); }
+  .prev-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .prev-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .prev-arrow {
+    font-size: 24px;
+    color: var(--peach-deep);
+  }
+
+  @media (max-width: 640px) {
+    .site-nav { padding: 12px 20px; }
+    .article-header { padding: 48px 24px 36px; }
+    .article-body { padding: 40px 24px 60px; }
+    .article-footer { padding: 40px 24px; }
+    .prev-article { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SITE NAV -->
+<nav class="site-nav">
+  <a href="index.html" class="site-nav-back">← Back to Portfolio</a>
+  <a href="index.html" class="site-nav-name">Chloe Oriotis</a>
+</nav>
+
+<!-- ARTICLE HEADER -->
+<header class="article-header">
+  <div class="article-tag-row">
+    <span class="article-tag tag-essay">Essay</span>
+    <span class="article-tag tag-audio">+ Audio</span>
+  </div>
+  <h1 class="article-title">Lessons Learned<br>While Working<br><em>on the Road</em></h1>
+  <p class="article-dek">On being paid to be the dumbest person in the room, wafer scanners, butter chicken in South Dakota, and why comfort zones are danger zones.</p>
+  <div class="article-meta">
+    <span class="article-byline"><strong>Chloe Oriotis</strong></span>
+    <div class="article-dot"></div>
+    <span class="article-byline">~6 min read</span>
+    <div class="article-dot"></div>
+    <span class="article-byline" id="pub-date">2026</span>
+  </div>
+</header>
+
+<!-- ARTICLE BODY -->
+<!-- PASTE YOUR ARTICLE TEXT BELOW -->
+<!-- Lesson headings use <h2> tags — they get the ruled separator automatically -->
+<!-- For the cross-reference to the improv article, use: <a href="improv.html" class="xref">Why Engineers Should Do Improv</a> -->
+<!-- Pull quotes: <div class="pull-quote">Your best line here.</div> -->
+<main class="article-body">
+
+  <p>I'm paid to be the dumbest person in the room. And I love it!</p>
+
+<p>Keep in mind, I am a mechanical engineer with a degree from one of the best schools in my country. I work with cutting-edge robotics and autonomous systems at a highly advanced company. I also spend half my time traveling to the US to visit researchers and lecturers at top-rated universities. So what gives?</p>
+
+<p>My job is to learn about these researchers' work and discuss how my company's systems could help them do their work even better. It seems straightforward until you're the one actually on the road, and you realize it goes so much deeper than just some consulting.</p>
+
+<p>It's making me into a better me, professionally and personally. Here are some takeaways so far:</p>
+
+<h2><em>Lesson 1: There's always a bigger fish, and that's pretty great</em></h2>
+
+<p>Researchers are very specifically knowledgeable. During a recent visit, one brought up his work on wafer scanners. I immediately thought, "yum, Stroopwafles" until he started talking about semiconductors, and I realized I needed a snack. I am not a subject matter expert on semiconductor manufacturing, nor impulse control, nor underwater concrete 3D printing, nor anything else these people study, but my education and subsequent work experience have prepared me enough to at least hold a conversation.</p>
+
+<p>That is exactly what I need to learn the basics of their work, translate their needs into product requirements, and begin the conversation on which system would be best for them. It's an appreciated skill to bring to the consultation.</p>
+
+<p>When I first started this job, I held myself to unreasonably high expectations. It's always great to familiarize myself with the basics of a client's study, but it's not feasible for me to learn their life's work after an hour of Googling. I, for better or worse, am not AI, so this brings me to the next lesson, of how I compensate:</p>
+
+<h2><em>Lesson 2: Curiosity saved the cat</em></h2>
+
+<p>I ask a stupid amount of questions. Some of these questions are also stupid, but if I need to know, I will always ask. I feel free to do so because of my well-trained response to humility (see: <a href="improv.html" class="xref">Why Engineers Should Do Improv</a> for more on that), but also because I've learned that it's one of the quickest ways to develop mutual understanding. And where there's understanding, better relationships can grow.</p>
+
+<p>Curiosity is also a way to show authenticity. If I'm genuinely intrigued by what they plan to use a product for, I won't hide that. I feel so much more connected when interests are shared. One question leads to another, then a commonality is found, and the conversation meanders down a whole new path, and suddenly we're sitting across a table dumbfounded as we're realizing our families' villages are ten minutes from each other back home in Greece.</p>
+
+<p>After promising we won't share the directions to our favourite secret beach to anyone, we resume our conversation on autonomous vehicles with a deeper sense of trust based on understanding. It goes like a well-oiled machine, and it wouldn't have happened if I didn't offer authenticity through curiosity. Though, that's sometimes a daunting task. Which leads me to:</p>
+
+<h2><em>Lesson 3: Kenny Loggins had the right idea</em></h2>
+
+<p>I don't think I'll ever be lucky enough to hop into a Top Gun-style fighter jet (if you know someone who can hook me up, give me a ring), but that's quite a drastic example of what it means to step out of one's comfort zone. Taking this job, saying "yes, I'd like to be away from home for weeks at a time to meet with highly intelligent strangers and explore Hilton's vast collection of business hotels", was a scary thing for me. It was a big jump from my last role which took place at an office a 20 minute bike ride away.</p>
+
+<p>But it's dangerous to stay stagnant. Dangerous to personal growth, to the collection of novel experiences, to the exposure to new ideas and ways of thinking. As a proud lifelong learner, I simply can't be the best me if I sit quietly in my comfort zone. So, here I am.</p>
+
+<p>My favourite butter chicken dish comes from a Nepalese restaurant in South Dakota. I stood beneath the weather drones they filmed for Twisters in Oklahoma. I learned how to lasso at a rodeo in Colorado. All these experiences, these exciting additions to Chloe, all because I took this big, scary job.</p>
+
+<p>With each new client comes a new conversation and new possibilities. I'm ecstatic to be in a position where my job can not only help my clients do better work, but provide so much to me as well.</p>
+
+<p>I hope you feel a little more connected to me after reading this. Yes, I admit, at first this job was daunting. But it's one of the greatest ongoing adventures I've had. The more people I meet, the more I learn, and maybe one day my travels will lead me to the Netherlands, and when an engineer asks if I know anything about wafers, there might actually be a chance I'll know exactly what they're talking about.</p>
+
+<!-- PHOTOS — replace placeholders when ready -->
+<div class="article-image landscape">
+  <img src="butterchicken.jpg" alt="Roadtrip-worthy butter chicken. South Dakota.">
+</div>
+<p class="article-image-caption">Roadtrip-worthy butter chicken. South Dakota.</p>
+
+<div class="article-image landscape">
+  <img src="swamp.jpg" alt="The Honey Island Swamp. Louisiana.">
+</div>
+<p class="article-image-caption">The Honey Island Swamp. Louisiana.</p>
+
+<div class="article-image landscape">
+  <img src="rodeo.jpg" alt="Giddy up. Colorado.">
+</div>
+<p class="article-image-caption">Giddy up. Colorado.</p>
+
+  <!-- PASTE FULL ARTICLE HERE — one <p> per paragraph, <h2> for each lesson heading -->
+
+  <!-- LESSON HEADING EXAMPLE: -->
+  <!-- <h2>Lesson 1: There's always a <em>bigger fish</em></h2> -->
+
+  <!-- CROSS REFERENCE EXAMPLE: -->
+  <!-- <p>...my well-trained response to humility (see: <a href="improv.html" class="xref">Why Engineers Should Do Improv</a> for more on that)...</p> -->
+
+</main>
+
+<!-- AUDIO VERSION -->
+<div class="audio-section">
+  <div class="audio-inner">
+    <p class="audio-eyebrow">Also available as audio</p>
+    <h3 class="audio-title">Lessons Learned While Working on the Road</h3>
+    <p class="audio-sub">Read aloud by Chloe Oriotis · ~6 min</p>
+
+    <!-- When your recording is ready, replace the placeholder block with:
+         <audio class="audio-player" controls src="audio/ontheroad.mp3"></audio>
+         Supported formats: mp3, m4a, wav — mp3 recommended for broadest compatibility -->
+    <div class="audio-placeholder">
+      <span class="audio-placeholder-icon">🎙</span>
+      <span class="audio-placeholder-text">Audio recording coming soon</span>
+    </div>
+    <p class="audio-caption">Recording will appear here once uploaded to GitHub</p>
+  </div>
+</div>
+<a class="prev-article" href="improv.html">
+  <span class="prev-arrow">←</span>
+  <div>
+    <span class="prev-label">Previous Essay</span>
+    <span class="prev-title">Why Engineers Should Do Improv</span>
+  </div>
+</a>
+<a class="prev-article" href="birds.html" style="justify-content:flex-end;border-top:none;">
+  <div style="text-align:right">
+    <span class="prev-label">Next Essay</span>
+    <span class="prev-title">A Brief Defence of the Bird Brain</span>
+  </div>
+  <span class="prev-arrow">→</span>
+</a>
+
+<!-- ARTICLE FOOTER -->
+<footer class="article-footer">
+  <div>
+    <p class="article-footer-label">Written by</p>
+    <p class="article-footer-name">Chloe <em>Oriotis</em></p>
+  </div>
+  <div class="article-footer-links">
+    <a href="index.html#writing" class="footer-link">All writing</a>
+    <a href="index.html#about" class="footer-link">About</a>
+    <a href="mailto:chloe.oriotis@gmail.com" class="footer-link">Get in touch</a>
+    <a href="Chloe_Oriotis_Resume_2026.pdf" download class="footer-link-btn">Download Résumé ↓</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('pub-date').textContent =
+    new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+</script>
+</body>
+</html>

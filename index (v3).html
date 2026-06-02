@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chloe Oriotis — Engineer, Storyteller, Strategist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #faf6f0;
+    --blush: #f2e8e0;
+    --sage: #c8d5c0;
+    --sage-deep: #7a9970;
+    --sage-ink: #3a5438;
+    --peach: #e8b49a;
+    --peach-deep: #c97a58;
+    --sky: #b8d4d8;
+    --sky-deep: #4a8a94;
+    --lilac: #d4c8e0;
+    --lilac-deep: #7a6094;
+    --ink: #1e1c18;
+    --ink-2: #3d3a32;
+    --ink-3: #7a7568;
+    --ink-4: #b0aa9e;
+    --rule: rgba(30,28,24,0.1);
+    --rule-strong: rgba(30,28,24,0.2);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* custom cursor dot */
+  .cursor-dot {
+    width: 8px; height: 8px;
+    background: var(--peach-deep);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform .1s;
+    mix-blend-mode: multiply;
+  }
+
+  /* ── TICKER TAPE ── */
+  .ticker {
+    background: var(--sage);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 9px 0;
+    border-bottom: 1.5px solid var(--sage-deep);
+  }
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 28s linear infinite;
+  }
+  .ticker-inner span {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--sage-ink);
+    padding: 0 32px;
+  }
+  .ticker-inner span::before {
+    content: '✦';
+    margin-right: 32px;
+    opacity: .5;
+  }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    padding: 0 48px 15px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .masthead-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 48px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--sage);
+    margin: 0 -48px;
+  }
+  .masthead-issue {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  nav { display: flex; gap: 32px; align-items: center; }
+  nav a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .06em;
+    color: var(--ink-2);
+    text-decoration: none;
+    position: relative;
+    transition: color .2s;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 1px;
+    background: var(--peach-deep);
+    transition: width .25s;
+  }
+  nav a:hover { color: var(--peach-deep); }
+  nav a:hover::after { width: 100%; }
+  .nav-resume {
+    background: var(--ink) !important;
+    color: var(--parchment) !important;
+    padding: 7px 18px !important;
+    font-size: 11px !important;
+    letter-spacing: .1em !important;
+    text-transform: uppercase !important;
+    font-family: 'DM Mono', monospace !important;
+    transition: background .2s !important;
+  }
+  .nav-resume:hover { background: var(--peach-deep) !important; color: var(--parchment) !important; }
+  .nav-resume::after { display: none !important; }
+
+  .masthead-hero {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: end;
+    padding: 36px 0 0;
+    gap: 24px;
+  }
+  .masthead-left {
+    padding-bottom: 20px;
+  }
+  .masthead-left p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink-3);
+    line-height: 1.5;
+    max-width: 260px;
+  }
+  .masthead-name {
+    text-align: center;
+    padding-bottom: 0;
+  }
+  .masthead-name h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 9vw, 112px);
+    font-weight: 300;
+    letter-spacing: .04em;
+    line-height: .92;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+  .masthead-name h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--peach-deep);
+  }
+  .masthead-right {
+    text-align: right;
+    padding-bottom: 20px;
+  }
+  .masthead-right p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink-3);
+    line-height: 1.5;
+    max-width: 260px;
+    margin-left: auto;
+  }
+  .masthead-tags {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+  }
+  .masthead-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    padding: 0 20px;
+    border-right: 1px solid var(--rule);
+  }
+  .masthead-tag:last-child { border-right: none; }
+  .masthead-tag.highlight { color: var(--sage-deep); font-weight: 500; }
+
+  /* ── HERO GRID ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    min-height: 480px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .hero-main {
+    background: var(--sage);
+    padding: 56px 52px;
+    border-right: 2px solid var(--ink);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .hero-main::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: -80px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.18);
+    pointer-events: none;
+  }
+  .hero-kicker {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--sage-ink);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-kicker::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--sage-ink);
+    opacity: .5;
+  }
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4.5vw, 58px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--sage-ink);
+    margin-bottom: 24px;
+  }
+  .hero-headline em {
+    font-style: italic;
+    font-weight: 300;
+  }
+  .hero-body {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--sage-ink);
+    opacity: .85;
+    max-width: 460px;
+    margin-bottom: 36px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 36px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(58,84,56,.2);
+  }
+  .stat-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 600;
+    color: var(--sage-ink);
+    line-height: 1;
+  }
+  .stat-l {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--sage-ink);
+    opacity: .55;
+    margin-top: 4px;
+  }
+
+  .hero-side {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* top half — photo frame, full width, half height of hero */
+  .hero-photo-frame {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px solid var(--ink);
+    background: var(--blush);
+    min-height: 240px;
+  }
+  .hero-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: saturate(.9) contrast(1.03);
+    transition: transform .5s ease, filter .4s;
+  }
+  .hero-photo-frame:hover img { transform: scale(1.02); filter: saturate(1.0) contrast(1.0); }
+  /* placeholder shown until photo is added */
+  .hero-photo-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--blush);
+  }
+  .hero-photo-placeholder-icon {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--peach-deep);
+    opacity: .4;
+  }
+  .hero-photo-placeholder-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+  }
+  /* caption strip at bottom of photo */
+  .hero-photo-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 28px 24px 14px;
+    background: linear-gradient(transparent, rgba(30,28,24,.55));
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(247,244,238,.7);
+    pointer-events: none;
+  }
+
+  /* bottom half — writing CTA */
+  .hero-writing-cta {
+    background: var(--parchment);
+    padding: 32px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .cta-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cta-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+  .cta-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .cta-headline em { font-style: italic; color: var(--peach-deep); }
+  .cta-sub {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--ink-3);
+    margin-bottom: 20px;
+  }
+  .cta-articles {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .cta-article-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+    text-decoration: none;
+    transition: padding-left .2s;
+    gap: 12px;
+  }
+  .cta-article-link:first-child { border-top: 1px solid var(--rule); }
+  .cta-article-link:hover { padding-left: 6px; }
+  .cta-article-info { flex: 1; }
+  .cta-article-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .cta-article-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.2;
+    transition: color .2s;
+  }
+  .cta-article-link:hover .cta-article-title { color: var(--peach-deep); }
+  .cta-arrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-4);
+    flex-shrink: 0;
+    transition: color .2s, transform .2s;
+  }
+  .cta-article-link:hover .cta-arrow { color: var(--peach-deep); transform: translateX(3px); }
+  .cta-see-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--peach-deep);
+    text-decoration: none;
+    margin-top: 14px;
+    transition: gap .2s;
+    align-self: flex-start;
+  }
+  .cta-see-all:hover { gap: 14px; }
+  .cta-see-all::after { content: '→'; }
+
+  /* ── TAG PILLS (used in three-col cards) ── */
+  .tag-pill {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 99px;
+    margin-bottom: 14px;
+  }
+  .pill-essay { background: var(--peach); color: var(--peach-deep); }
+  .pill-audio { background: var(--sky); color: var(--sky-deep); }
+  .pill-essay2 { background: var(--lilac); color: var(--lilac-deep); }
+  .pill-soon { background: var(--blush); color: var(--ink-3); }
+
+  /* ── PORTFOLIO THREE-UP ── */
+  .portfolio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 32px 48px 20px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .portfolio-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .portfolio-header span {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    color: var(--ink-4);
+  }
+
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom: 2px solid var(--ink);
+  }
+  .piece-card {
+    padding: 36px 40px 28px;
+    border-right: 1px solid var(--rule-strong);
+    position: relative;
+    transition: background .25s;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+  .piece-card:last-child { border-right: none; }
+  .piece-card:hover { background: var(--blush); }
+  .piece-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    font-weight: 300;
+    line-height: 1;
+    color: rgba(30,28,24,.06);
+    position: absolute;
+    top: 20px; right: 24px;
+    transition: color .25s;
+    pointer-events: none;
+  }
+  .piece-card:nth-child(1):hover .piece-num { color: rgba(201,122,88,.1); }
+  .piece-card:nth-child(2):hover .piece-num { color: rgba(74,138,148,.1); }
+  .piece-card:nth-child(3):hover .piece-num { color: rgba(122,96,148,.1); }
+  .piece-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 14px 0 12px;
+    transition: color .2s;
+  }
+  .piece-card:hover .piece-title { color: var(--peach-deep); }
+  .piece-dek {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--ink-3);
+    flex: 1;
+  }
+  .piece-foot {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .piece-format {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+  }
+  /* read arrow — appears on hover */
+  .piece-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--peach-deep);
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity .2s, transform .2s;
+    white-space: nowrap;
+  }
+  .piece-card:hover .piece-cta { opacity: 1; transform: translateX(0); }
+
+  /* ── ABOUT ── */
+  .about-section {
+    display: grid;
+    grid-template-columns: 5fr 3fr;
+    border-bottom: 2px solid var(--ink);
+  }
+  .about-main {
+    padding: 64px 52px;
+    border-right: 2px solid var(--ink);
+  }
+  .about-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .about-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+    max-width: 60px;
+  }
+  .about-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 36px;
+  }
+  .about-headline em {
+    font-style: italic;
+    color: var(--peach-deep);
+  }
+  .about-body {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--ink-2);
+    max-width: 560px;
+    columns: 1;
+  }
+  .about-body p { margin-bottom: 18px; }
+  .about-body p:last-child { margin-bottom: 0; }
+  .about-body strong { font-weight: 500; color: var(--ink); }
+  .about-body em { font-style: italic; color: var(--ink-3); }
+
+  .about-side {
+    background: var(--sage);
+    padding: 52px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .side-block { }
+  .side-block-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--sage-ink);
+    opacity: .6;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(58,84,56,.2);
+  }
+  .side-item {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--sage-ink);
+    line-height: 1.55;
+    padding: 5px 0;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+  }
+  .side-item::before {
+    content: '✦';
+    font-size: 7px;
+    color: var(--peach-deep);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .fun-fact {
+    background: var(--peach);
+    padding: 20px;
+    margin-top: auto;
+  }
+  .fun-fact-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--peach-deep);
+    margin-bottom: 8px;
+  }
+  .fun-fact-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink-2);
+    line-height: 1.45;
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 2px solid var(--ink);
+    min-height: 420px;
+  }
+  .contact-left {
+    padding: 64px 52px;
+    border-right: 2px solid var(--ink);
+    background: var(--parchment);
+  }
+  .contact-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 68px);
+    font-weight: 300;
+    line-height: 1.0;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .contact-left h2 em { font-style: italic; color: var(--peach-deep); }
+  .contact-body {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--ink-3);
+    margin-bottom: 40px;
+    max-width: 400px;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 2px; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    text-decoration: none;
+    color: var(--ink);
+    border: 1px solid transparent;
+    transition: border-color .2s, background .2s;
+    background: transparent;
+  }
+  .contact-link:hover {
+    border-color: var(--rule-strong);
+    background: var(--blush);
+  }
+  .cl-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    width: 52px;
+    flex-shrink: 0;
+  }
+  .cl-val {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-2);
+  }
+  .cl-arrow {
+    margin-left: auto;
+    color: var(--ink-4);
+    font-size: 14px;
+    transition: transform .2s, color .2s;
+  }
+  .contact-link:hover .cl-arrow { transform: translateX(4px); color: var(--peach-deep); }
+
+  .contact-right {
+    background: var(--peach);
+    padding: 64px 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .resume-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--peach-deep);
+    margin-bottom: 16px;
+  }
+  .contact-right h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .contact-right h3 em { font-style: italic; }
+  .contact-right p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink-2);
+    margin-bottom: 36px;
+    max-width: 340px;
+  }
+  .btn-dl {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--ink);
+    color: var(--parchment);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: 16px 28px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background .2s;
+    align-self: flex-start;
+  }
+  .btn-dl:hover { background: var(--peach-deep); }
+  .built-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(30,28,24,.3);
+    margin-top: 32px;
+  }
+  .built-note a { color: rgba(30,28,24,.45); text-decoration: none; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 18px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--rule);
+  }
+  .footer-l, .footer-r {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+  }
+
+  /* ── FADE IN ── */
+  [data-fade] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .65s ease, transform .65s ease;
+  }
+  [data-fade].visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── PHOTO GALLERY ── */
+  .fun-gallery {
+    margin-top: 16px;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .gallery-thumb {
+    aspect-ratio: 1;
+    border-radius: 3px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    background: rgba(58,84,56,.15);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .gallery-thumb:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 16px rgba(30,28,24,.18);
+    z-index: 1;
+  }
+  .gallery-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    transition: opacity .2s;
+  }
+  .gallery-thumb:hover img { opacity: .92; }
+
+  /* caption overlay on hover */
+  .gallery-thumb .thumb-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(30,28,24,.65));
+    padding: 16px 6px 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(247,244,238,.85);
+    opacity: 0;
+    transition: opacity .2s;
+  }
+  .gallery-thumb:hover .thumb-caption { opacity: 1; }
+
+  /* placeholder for empty slots */
+  .gallery-thumb.empty {
+    cursor: default;
+    background: rgba(58,84,56,.1);
+  }
+  .gallery-thumb.empty::after {
+    content: '✦';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 14px;
+    color: var(--sage-deep);
+    opacity: .35;
+  }
+  .gallery-thumb.empty:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* "add photos" note — only visible on placeholder state */
+  .gallery-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--sage-ink);
+    opacity: .35;
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  /* lightbox */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(30,28,24,.88);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s;
+    backdrop-filter: blur(6px);
+  }
+  .lightbox.open { opacity: 1; pointer-events: all; }
+  .lightbox img {
+    max-width: min(90vw, 700px);
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 3px;
+    box-shadow: 0 24px 80px rgba(0,0,0,.4);
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 24px; right: 28px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(247,244,238,.5);
+    cursor: pointer;
+    transition: color .2s;
+    background: none;
+    border: none;
+  }
+  .lightbox-close:hover { color: var(--peach); }
+  .lightbox-caption {
+    position: absolute;
+    bottom: 32px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(247,244,238,.4);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 860px) {
+    .masthead { padding: 0 20px; }
+    .masthead-bar { margin: 0 -20px; padding: 14px 20px; }
+    .masthead-hero { grid-template-columns: 1fr; text-align: center; gap: 12px; }
+    .masthead-left, .masthead-right { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-main { border-right: none; border-bottom: 2px solid var(--ink); }
+    .three-col { grid-template-columns: 1fr; }
+    .piece-card { border-right: none; border-bottom: 1px solid var(--rule-strong); }
+    .about-section { grid-template-columns: 1fr; }
+    .about-main { border-right: none; border-bottom: 2px solid var(--ink); padding: 40px 24px; }
+    .about-side { padding: 40px 24px; }
+    .contact-section { grid-template-columns: 1fr; }
+    .contact-left { border-right: none; border-bottom: 2px solid var(--ink); padding: 40px 24px; }
+    .contact-right { padding: 40px 24px; }
+    footer { padding: 14px 20px; flex-direction: column; gap: 6px; }
+    .portfolio-header { padding: 24px 20px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursor"></div>
+
+<!-- TICKER -->
+<!-- <div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span>Engineer</span><span>Storyteller</span><span>Strategist</span><span>Technical Translator</span><span>Novelist-in-progress</span><span>Second City Alum</span><span>Valedictorian</span><span>$1.8M Pipeline</span><span>100+ Academic Consultations</span><span>Nine US States</span><span>Toronto</span>
+    <span>Engineer</span><span>Storyteller</span><span>Strategist</span><span>Technical Translator</span><span>Novelist-in-progress</span><span>Second City Alum</span><span>Valedictorian</span><span>$1.8M Pipeline</span><span>100+ Academic Consultations</span><span>Nine US States</span><span>Toronto</span>
+  </div>
+</div> -->
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-bar">
+    <span class="masthead-issue" id="issue-date">Vol. I — Toronto, Canada</span>
+    <nav>
+      <a href="#writing">Writing</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="Chloe_Oriotis_Resume_2026.pdf" download class="nav-resume">Résumé ↓</a>
+    </nav>
+  </div>
+  <div class="masthead-hero">
+    <div class="masthead-left">
+      <p>Mechanical engineer.<br>Technical communicator.<br>Chronically curious.</p>
+    </div>
+    <div class="masthead-name">
+      <h1>Chloe<br><em>Oriotis</em></h1>
+    </div>
+    <div class="masthead-right">
+      <p>Improvisor. Actress.<br>Traveller. Writer.<br>Novel in editing.<br>(No spoilers!)</p>
+    </div>
+  </div>
+  <div class="masthead-tags">
+    <span class="masthead-tag">Engineer</span>
+    <span class="masthead-tag highlight">Technical Translator</span>
+    <span class="masthead-tag">Storyteller</span>
+    <span class="masthead-tag highlight">Strategist</span>
+    <span class="masthead-tag">Toronto</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-main" data-fade>
+    <div>
+      <p class="hero-kicker">The pitch</p>
+      <h2 class="hero-headline">Tech is too powerful<br>to be burdened by<br><em>a story problem.</em></h2>
+      <p class="hero-body">I'm a mechanical engineer who spent five years moving deliberately closer to the audience — from building systems, to consulting on them, to selling and explaining them to a hundred researchers and faculty across the US. It turns out the hardest part was never the engineering.</p>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-n">$1.8M</div>
+        <div class="stat-l">Pipeline · built from cold</div>
+      </div>
+      <div>
+        <div class="stat-n">100+</div>
+        <div class="stat-l">Academic conversations</div>
+      </div>
+      <div>
+        <div class="stat-n">9</div>
+        <div class="stat-l">US states · solo</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-side">
+
+    <!-- TOP: Photo frame — full width, half height -->
+    <div class="hero-photo-frame">
+      <!-- When ready, replace the placeholder with your photo:
+           <img src="photos/headshot.jpg" alt="Chloe Oriotis">
+           <p class="hero-photo-caption">Chloe Oriotis · Toronto</p>  -->
+      <div class="hero-photo-placeholder">
+        <span class="hero-photo-placeholder-icon">C.O.</span>
+        <span class="hero-photo-placeholder-label">Photo coming soon</span>
+      </div>
+    </div>
+
+    <!-- BOTTOM: Writing CTA -->
+    <div class="hero-writing-cta" data-fade>
+      <div>
+        <p class="cta-eyebrow">From the desk</p>
+        <h3 class="cta-headline">Writing that makes<br><em>hard things click.</em></h3>
+        <p class="cta-sub">Essays and audio on engineering, communication, and what happens when you spend enough time in difficult rooms.</p>
+      </div>
+      <div>
+        <div class="cta-articles">
+          <a class="cta-article-link" href="improv.html">
+            <div class="cta-article-info">
+              <span class="cta-article-tag">Essay · 8 min</span>
+              <span class="cta-article-title">Why Engineers Should Do Improv</span>
+            </div>
+            <span class="cta-arrow">→</span>
+          </a>
+          <a class="cta-article-link" href="ontheroad.html">
+            <div class="cta-article-info">
+              <span class="cta-article-tag">Essay + Audio · 6 min</span>
+              <span class="cta-article-title">Lessons Learned on the Road</span>
+            </div>
+            <span class="cta-arrow">→</span>
+          </a>
+          <a class="cta-article-link" href="birds.html">
+            <div class="cta-article-info">
+              <span class="cta-article-tag">Essay · 10 min</span>
+              <span class="cta-article-title">In Defence of the Bird Brain</span>
+            </div>
+            <span class="cta-arrow">→</span>
+          </a>
+        </div>
+        <a class="cta-see-all" href="#writing">See all work</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<div class="portfolio-header" id="writing">
+  <h2>The Work</h2>
+  <span>Three essays · One also available as audio</span>
+</div>
+<section class="three-col">
+  <a class="piece-card" href="improv.html" data-fade>
+    <div class="piece-num">01</div>
+    <span class="tag-pill pill-essay">Essay</span>
+    <h3 class="piece-title">Why Engineers Should Do Improv</h3>
+    <p class="piece-dek">What a sketch comedy musical, a crashing laptop, and a room full of researchers taught me about the one skill no engineering curriculum bothers to teach.</p>
+    <div class="piece-foot">
+      <span class="piece-format">~8 min read</span>
+      <span class="piece-cta">Read →</span>
+    </div>
+  </a>
+  <a class="piece-card" href="ontheroad.html" data-fade>
+    <div class="piece-num">02</div>
+    <span class="tag-pill pill-essay2">Essay</span>
+    <span class="tag-pill pill-audio" style="margin-left:4px">+ Audio</span>
+    <h3 class="piece-title">Lessons Learned While Working on the Road</h3>
+    <p class="piece-dek">On being paid to be the dumbest person in the room, wafer scanners, butter chicken in South Dakota, and why comfort zones are danger zones.</p>
+    <div class="piece-foot">
+      <span class="piece-format">~6 min read · also listen</span>
+      <span class="piece-cta">Read →</span>
+    </div>
+  </a>
+  <a class="piece-card" href="birds.html" data-fade>
+    <div class="piece-num">03</div>
+    <span class="tag-pill pill-essay">Essay</span>
+    <h3 class="piece-title">In Defence of the Bird Brain</h3>
+    <p class="piece-dek">Middle School Chloe had a bird phase. Middle School Chloe also didn't have many friends. Coincidence? Maybe. But she knew things the popular kids didn't.</p>
+    <div class="piece-foot">
+      <span class="piece-format">~10 min read</span>
+      <span class="piece-cta">Read →</span>
+    </div>
+  </a>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-main" data-fade>
+    <p class="about-eyebrow">Who I am</p>
+    <h2 class="about-headline">"As soon as I have got<br>flying to perfection,<br>I have got a scheme<br>about a steam engine."<br><em>Ada Lovelace</em></h2>
+      <!-- One long<br>deliberate move<br>toward the<br><em>audience.</em></h2> -->
+    <div class="about-body">
+      <p>I started in mechanical engineering — control systems, mechatronics, bioengineering — and spent the early part of my career doing what engineers do: solving problems with rigour and precision. What I kept noticing was that the hardest problem was rarely technical.</p>
+      <p>It was the explaining. The translating. The moment in a room when you can see someone's eyes start to glaze, and you have about thirty seconds to find a different story before you lose them entirely.</p>
+      <p>I've now had <strong>nearly a hundred of those moments</strong> with professors, researchers, deans and department chairs across nine US states. I've built a $1.8M pipeline from cold, entirely on the strength of listening carefully and telling the right story back.</p>
+      <p>I learned that the gap between a technical and a non-technical audience isn't about intelligence — it's about story. Give people the right story and the complex thing clicks.</p>
+      <p>Outside of work: <strong>novel in editing</strong> (no spoilers), <em>Second City improv alumna</em>, Boskone short story competition finalist, and a cyclist planning her first bikepacking trip. Wish me luck. I graduated as voted-in valedictorian of the University of Toronto Engineering class of 2021.</p>
+      <p>I’m interested in roles where a combination of engineering credibility, narrative craft, and stage presence creates outstanding impact.</p>
+    </div>
+  </div>
+  <div class="about-side" data-fade>
+    <div class="side-block">
+      <p class="side-block-label">Credentials</p>
+      <div class="side-item">Voted-in Valedictorian, U of T Engineering 2021</div>
+      <div class="side-item">John Weber Award · Mechanical Engineering</div>
+      <div class="side-item">President's Entrance Scholarship</div>
+      <div class="side-item">Boskone short story finalist</div>
+      <div class="side-item">Second City improv alumna</div>
+    </div>
+    <div class="side-block">
+      <p class="side-block-label">What I bring</p>
+      <div class="side-item">Technical storytelling</div>
+      <div class="side-item">Consultative presentations & demos</div>
+      <div class="side-item">Account strategy & stakeholder mgmt</div>
+      <div class="side-item">AI-augmented research</div>
+      <div class="side-item">Mechanical & mechatronic systems design</div>
+    </div>
+    <div class="side-block">
+      <p class="side-block-label">The Fun Stuff</p>
+      <div class="side-item">Avid traveller</div>
+      <div class="side-item">Stage actress · Skule Nite Sketch Comedy Musical</div>
+      <div class="side-item">Cyclist · bikepacking in progress</div>
+      <div class="fun-gallery" id="gallery">
+        <div class="gallery-grid">
+          <!-- Replace .empty divs with real images as you add photos -->
+          <!-- Example: <div class="gallery-thumb" data-caption="Skule Nite 2020"><img src="photos/skule.jpg" alt="Skule Nite"><span class="thumb-caption">Skule Nite</span></div> -->
+          <div class="gallery-thumb empty"></div>
+          <div class="gallery-thumb empty"></div>
+          <div class="gallery-thumb empty"></div>
+          <div class="gallery-thumb empty"></div>
+          <div class="gallery-thumb empty"></div>
+          <div class="gallery-thumb empty"></div>
+        </div>
+        <p class="gallery-note">Photos coming soon</p>
+      </div>
+    </div>
+    <!-- <div class="fun-fact">
+      <p class="fun-fact-label">A note</p>
+      <p class="fun-fact-text">"You can't bluff a room full of PhDs. You have to actually understand the thing — and then find the story that makes them understand it too."</p>
+    </div> -->
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-left" data-fade>
+    <h2>Let's<br><em>chat.</em></h2>
+    <p class="contact-body">I'm interested in developer advocacy, sales engineering, and technical storytelling in Toronto or US remote. If you're building something that needs to be explained beautifully, I'd love to hear about it.</p>
+    <div class="contact-links">
+      <a href="mailto:chloe.oriotis@gmail.com" class="contact-link">
+        <span class="cl-type">Email</span>
+        <span class="cl-val">chloe.oriotis@gmail.com</span>
+        <span class="cl-arrow">→</span>
+      </a>
+      <a href="https://linkedin.com/in/chloeoriotis" target="_blank" class="contact-link">
+        <span class="cl-type">LinkedIn</span>
+        <span class="cl-val">linkedin.com/in/chloeoriotis</span>
+        <span class="cl-arrow">→</span>
+      </a>
+      <!-- <a href="https://github.com/chloeoriotis" target="_blank" class="contact-link">
+        <span class="cl-type">GitHub</span>
+        <span class="cl-val">github.com/chloeoriotis</span>
+        <span class="cl-arrow">→</span>
+      </a> -->
+      <!-- <a href="https://chloeoriotis.github.io" class="contact-link">
+        <span class="cl-type">Site</span>
+        <span class="cl-val">chloeoriotis.github.io</span>
+        <span class="cl-arrow">→</span>
+      </a> -->
+    </div>
+  </div>
+  <div class="contact-right" data-fade>
+    <div>
+      <p class="resume-eyebrow">Available for download</p>
+      <h3>Full<br><em>Résumé</em></h3>
+      <p>Engineer · Storyteller · Strategist</p>
+      <a href="Chloe_Oriotis_Resume_2026.pdf" download class="btn-dl">Download Résumé ↓</a>
+    </div>
+    <p class="built-note">Site co-designed with <a href="https://claude.ai">Claude AI</a> · All wrtiting my own · Hosted on GitHub Pages</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-l">© 2026 Chloe Oriotis</span>
+  <span class="footer-r">Toronto · chloeoriotis.github.io</span>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">Close ✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <p class="lightbox-caption" id="lightbox-caption"></p>
+</div>
+
+<script>
+  // Cursor dot
+  const dot = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    dot.style.left = e.clientX + 'px';
+    dot.style.top = e.clientY + 'px';
+  });
+
+  // Masthead date
+  const d = new Date();
+  const mo = d.toLocaleDateString('en-CA', { month: 'long', year: 'numeric' });
+  document.getElementById('issue-date').textContent = 'Vol. I — ' + mo;
+
+  // Scroll fade-ins
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('[data-fade]').forEach((el, i) => {
+    el.style.transitionDelay = (i % 3) * 0.1 + 's';
+    obs.observe(el);
+  });
+
+  // ── PHOTO GALLERY — click to lightbox ──
+  document.querySelectorAll('.gallery-thumb:not(.empty)').forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      const img = thumb.querySelector('img');
+      if (!img) return;
+      openLightbox(img.src, thumb.dataset.caption || '');
+    });
+  });
+
+  // ── LIGHTBOX ──
+  function openLightbox(src, caption) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox-caption').textContent = caption;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>

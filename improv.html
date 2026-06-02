@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Engineers Should Do Improv — Chloe Oriotis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #faf6f0;
+    --blush: #f2e8e0;
+    --sage: #c8d5c0;
+    --sage-deep: #7a9970;
+    --sage-ink: #3a5438;
+    --peach: #e8b49a;
+    --peach-deep: #c97a58;
+    --ink: #1e1c18;
+    --ink-2: #3d3a32;
+    --ink-3: #7a7568;
+    --ink-4: #b0aa9e;
+    --rule: rgba(30,28,24,0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── SITE NAV ── */
+  .site-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 48px;
+    background: var(--sage);
+    border-bottom: 2px solid var(--ink);
+  }
+  .site-nav-back {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--sage-ink);
+    text-decoration: none;
+    transition: letter-spacing .2s;
+  }
+  .site-nav-back:hover { letter-spacing: .22em; }
+  .site-nav-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--sage-ink);
+    text-decoration: none;
+  }
+  .site-nav-name:hover { color: var(--peach-deep); }
+
+  /* ── ARTICLE HEADER ── */
+  .article-header {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 72px 48px 48px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .article-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 99px;
+    background: var(--peach);
+    color: var(--peach-deep);
+    margin-bottom: 24px;
+  }
+  .article-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.08;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .article-title em {
+    font-style: italic;
+    color: var(--peach-deep);
+  }
+  .article-dek {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--ink-3);
+    margin-bottom: 28px;
+    max-width: 580px;
+  }
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-byline {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+  }
+  .article-byline strong {
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+  .article-dot {
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: var(--ink-4);
+  }
+
+  /* ── ARTICLE BODY ── */
+  .article-body {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 52px 48px 80px;
+  }
+  .article-body p {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--ink-2);
+    margin-bottom: 28px;
+  }
+  .article-body p:last-child { margin-bottom: 0; }
+  .article-body strong { font-weight: 500; color: var(--ink); }
+  .article-body em { font-style: italic; color: var(--ink-3); }
+
+  /* section break */
+  .article-body hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 48px 0;
+    width: 80px;
+  }
+
+  /* pull quote */
+  .pull-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3vw, 32px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.35;
+    color: var(--peach-deep);
+    border-left: 3px solid var(--peach);
+    padding: 4px 0 4px 28px;
+    margin: 44px 0;
+  }
+
+  /* image placeholder */
+  .article-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--blush);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 44px 0 16px;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .article-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .article-image-placeholder {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    text-align: center;
+  }
+  .article-image-caption {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 44px;
+    text-align: center;
+  }
+
+  /* section heading */
+  .article-body h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 52px 0 20px;
+    line-height: 1.2;
+  }
+
+  /* ── ARTICLE FOOTER ── */
+  .article-footer {
+    background: var(--blush);
+    border-top: 2px solid var(--ink);
+    padding: 52px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .article-footer-left { }
+  .article-footer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 8px;
+  }
+  .article-footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--ink);
+  }
+  .article-footer-name em { font-style: italic; color: var(--peach-deep); }
+  .article-footer-links {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .footer-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .footer-link:hover { color: var(--peach-deep); }
+  .footer-link-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--parchment);
+    background: var(--ink);
+    padding: 8px 18px;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .footer-link-btn:hover { background: var(--peach-deep); }
+
+  /* ── NEXT ARTICLE ── */
+  .next-article {
+    border-top: 1px solid var(--rule);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .next-article:hover { background: var(--blush); }
+  .next-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .next-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .next-arrow {
+    font-size: 24px;
+    color: var(--peach-deep);
+  }
+
+  @media (max-width: 640px) {
+    .site-nav { padding: 12px 20px; }
+    .article-header { padding: 48px 24px 36px; }
+    .article-body { padding: 40px 24px 60px; }
+    .article-footer { padding: 40px 24px; }
+    .next-article { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SITE NAV -->
+<nav class="site-nav">
+  <a href="index.html" class="site-nav-back">← Back to Portfolio</a>
+  <a href="index.html" class="site-nav-name">Chloe Oriotis</a>
+</nav>
+
+<!-- ARTICLE HEADER -->
+<header class="article-header">
+  <span class="article-tag">Essay</span>
+  <h1 class="article-title">Why Engineers<br>Should Do<em>Improv</em></h1>
+  <p class="article-dek">Stage acting [].</p>
+  <div class="article-meta">
+    <span class="article-byline"><strong>Chloe Oriotis</strong></span>
+    <div class="article-dot"></div>
+    <span class="article-byline">~8 min read</span>
+    <div class="article-dot"></div>
+    <span class="article-byline" id="pub-date">2026</span>
+  </div>
+</header>
+
+<!-- ARTICLE BODY -->
+<!-- PASTE YOUR ARTICLE TEXT BELOW, WRAPPED IN <p> TAGS -->
+<!-- Use <hr> for section breaks, <div class="pull-quote">...</div> for standout quotes -->
+<!-- For the graph image: replace the placeholder div with <img src="..." alt="..."> inside .article-image -->
+<main class="article-body">
+
+  <!-- PASTE FULL ARTICLE HERE — one <p> tag per paragraph -->
+<p>If you’re reading this, you probably know that I travel to the US almost every other week to visit clients. I bring along my favourite product, a board full of sensors that’s great for teaching engineering students how internal measurement units, infrareds, hygrometers, and even radars work (there’s more, but this isn’t a sales pitch. Unless you’re interested…). This is a lovely system. But because the probability of running a demo smoothly sometimes feels like flipping a coin, things just don’t always work. So what would a person untrained in the art of improvisation do when the highly-built-up demonstration comes to a screeching halt due to, let’s say, a mandatory PC update?
+  </p>
+<p>Some babbling, probably. There’d be some awkward chuckles amid a lot of silence. Maybe some worn out bluescreen jokes. All that build-up, all the credibility that this person’s just established is fading quick. But if they knew how to think on their feet and how to keep momentum when the script’s torn to shreds, their audience will feel nothing more than a slight bump at their PC’s restart on the road to learning what they came here to.
+  </p>
+<p>It’s easy to see this and think <em>oh no</em>. But that’d be breaking the first rule of improv: the <em>yes-and</em>. Somewhat of a meme now, it ensures that two actors are never riffing their partners into a hole they cannot improvise out of.
+  </p>
+<p><em>Yes, my PC is restarting, and I need to continue with the demo. Yes, I know my products, and I can show them xyz in the meantime.</em> Whether it’s painting a picture of how the clients can use the product in the classroom or putting the thing in their hands to demonstrate build quality, creativity and adaptability will save you from disaster. The <em>yes-and</em> is an improvisationist’s greatest tool.
+  </p>
+<p>When I was cast in the University of Toronto’s sketch comedy musical show, I was introduced to a fantastic concept called the <em>laugh curve</em>. Keep in mind, this was an engineering show made by engineers, so we all ate up the idea of explaining showbiz through graphs. But the concept is pretty intuitive: it explains that a joke lands best when you wait for the audience’s peak laughter and engagement to begin to wane before you continue with the next. It has to be timed perfectly, however, so that the audience’s excitement doesn’t get too low and you need to work very hard to get them to the peak again. The moment they’re coming over the peak of the curve, you nail them with the next joke, and they’re right back up again. I’ve illustrated this in the graph below:
+  </p>
+
+  <!-- GRAPH IMAGE — replace placeholder when ready -->
+    <div class="article-image landscape">
+      <img src="laughcurve.jpg" alt="Riding the laugh curve">
+    </div>
+  <p class="article-image-caption">Riding the laugh curve</p>
+
+  <p>Humans love connecting with others, and it feels magical when it’s done with such effortless finesse. So while everyone can feel when a presentation is landing with an audience, it might not be clear exactly why. I’m an engineer, and I like having that knowledge. Would I have been able to identify this magic, understand its usefulness, and apply it to public speaking if I didn’t learn it before experiencing it onstage? Probably not. But now it’s more than an abstract feeling. It’s a tool for me to gauge the tone of an audience, and an indicator for when I should move on from that last topic.
+    </p>
+  <p>The importance of practicing improv isn’t only for reading an audience, or to keep them engaged while you put out your inevitable fires. It’s not even limited to the stage.
+    </p>
+  <p>
+    A developer could be writing code for hours at a time in front of a computer speaking only to a rubber duck. But they’re almost certainly not the only two members on their team. Engineers are stronger when working together, sharing ideas, and assisting each other through the bugs. Teamwork is critical. Imagine a group of improvisers riffing on a scene; the jokes are landing, the audience is climbing the laugh curve, then one actor says the dreaded no. They’ve stalled their teammates and left them scrambling to find a new angle to the bit (whatever an improviser says onstage is automatically considered true. Curveballs can topple a whole scene through story contradictions). No one wants to be in this position, so teammates don’t put them there.
+    </p>
+  <p>And, unfortunately, sometimes a project flops. It doesn’t matter how much time or effort was put into completing it; it didn’t work, and the engineers are left with a post-mortem and a next-project-shaped hole to fill. It’s frustrating, and sometimes difficult to not take personally. What’s a great way to build the resiliency needed to tackle the next project? Improv, of course. 
+    </p>
+  <p>
+    I have been on stage and flopped so hard I might as well have been scooped onto dry land from a pond. Pity laughs are actually worse than silence, FYI. But a sprinkling of embarrassment grows humility, and with humility comes resilience. Projects fail, demos crash, and deliverables slip into the abyss. But because it’s been practiced, the path of least resistance becomes ownership of the problem and action toward the next steps.
+    </p>
+  <p>So how can an engineer (customer-facing or not) best develop the non-numerical critical skills needed to be the best at their jobs? Flex imaginative problem solving on the fly, with pressure from a live audience. Understand the needs of the audience by their place on the laugh curve. Build teamwork and empathy through <em>yes-and</em>s. Grow resilience through humility when they just cannot think of the next joke to make, and laugh about it backstage after the show. 
+    </p>
+  <p>Improv is <em>fun</em>. That’s reason enough to do it. But it’s also an underutilized tool for developing “soft” engineering skills. A great engineer is a versatile one, and that’s why all of us should hop up on stage once in a while. Maybe someone in the audience will suggest a bluescreen skit. We’ll know what to do.
+    </p>
+
+
+  <!-- PULL QUOTE EXAMPLE — use for your best line -->
+  <!-- <div class="pull-quote">Pity laughs are actually worse than silence.</div> -->
+
+</main>
+
+<!-- NEXT ARTICLE -->
+<a class="next-article" href="ontheroad.html">
+  <div>
+    <span class="next-label">Next Essay</span>
+    <span class="next-title">Lessons Learned While Working on the Road</span>
+  </div>
+  <span class="next-arrow">→</span>
+</a>
+
+<!-- ARTICLE FOOTER -->
+<footer class="article-footer">
+  <div class="article-footer-left">
+    <p class="article-footer-label">Written by</p>
+    <p class="article-footer-name">Chloe <em>Oriotis</em></p>
+  </div>
+  <div class="article-footer-links">
+    <a href="index.html#writing" class="footer-link">All writing</a>
+    <a href="index.html#about" class="footer-link">About</a>
+    <a href="mailto:chloe.oriotis@gmail.com" class="footer-link">Get in touch</a>
+    <a href="Chloe_Oriotis_Resume_2026.pdf" download class="footer-link-btn">Download Résumé ↓</a>
+  </div>
+</footer>
+
+<script>
+  // Set publish date
+  document.getElementById('pub-date').textContent =
+    new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+</script>
+</body>
+</html>

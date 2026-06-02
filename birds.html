@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Brief Defence of the Bird Brain — Chloe Oriotis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #faf6f0;
+    --blush: #f2e8e0;
+    --sage: #c8d5c0;
+    --sage-deep: #7a9970;
+    --sage-ink: #3a5438;
+    --peach: #e8b49a;
+    --peach-deep: #c97a58;
+    --sky: #b8d4d8;
+    --sky-deep: #4a8a94;
+    --ink: #1e1c18;
+    --ink-2: #3d3a32;
+    --ink-3: #7a7568;
+    --ink-4: #b0aa9e;
+    --rule: rgba(30,28,24,0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── SITE NAV ── */
+  .site-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 48px;
+    background: var(--sage);
+    border-bottom: 2px solid var(--ink);
+  }
+  .site-nav-back {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--sage-ink);
+    text-decoration: none;
+    transition: letter-spacing .2s;
+  }
+  .site-nav-back:hover { letter-spacing: .22em; }
+  .site-nav-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--sage-ink);
+    text-decoration: none;
+  }
+  .site-nav-name:hover { color: var(--peach-deep); }
+
+  /* ── ARTICLE HEADER ── */
+  .article-header {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 72px 48px 48px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .article-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 99px;
+    background: var(--peach);
+    color: var(--peach-deep);
+    margin-bottom: 24px;
+  }
+  .article-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.08;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .article-title em {
+    font-style: italic;
+    color: var(--peach-deep);
+  }
+  .article-dek {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--ink-3);
+    margin-bottom: 28px;
+    max-width: 580px;
+  }
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-byline {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+  }
+  .article-byline strong { color: var(--ink-2); font-weight: 500; }
+  .article-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-4); }
+
+  /* ── ARTICLE BODY ── */
+  .article-body {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 52px 48px 80px;
+  }
+  .article-body p {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--ink-2);
+    margin-bottom: 28px;
+  }
+  .article-body p:last-child { margin-bottom: 0; }
+  .article-body strong { font-weight: 500; color: var(--ink); }
+  .article-body em { font-style: italic; color: var(--ink-3); }
+
+  /* section break */
+  .article-body hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 52px 0;
+    width: 80px;
+  }
+
+  /* bird section heading — each new bird gets one */
+  .article-body h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 60px 0 20px;
+    line-height: 1.15;
+    padding-top: 52px;
+    border-top: 1px solid var(--rule);
+  }
+  .article-body h2 em { font-style: italic; color: var(--peach-deep); }
+
+  /* pull quote */
+  .pull-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3vw, 30px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.35;
+    color: var(--peach-deep);
+    border-left: 3px solid var(--peach);
+    padding: 4px 0 4px 28px;
+    margin: 44px 0;
+  }
+
+  /* math block — monospace, set apart */
+  .math-block {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--ink-2);
+    background: var(--blush);
+    border-left: 3px solid var(--peach);
+    padding: 20px 24px;
+    margin: 32px 0;
+    border-radius: 0 3px 3px 0;
+    overflow-x: auto;
+  }
+  .math-block .math-label {
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  /* image */
+  .article-image {
+    width: 100%;
+    background: var(--blush);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 44px 0 16px;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .article-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .article-image.portrait { aspect-ratio: 3/4; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .article-image.landscape { aspect-ratio: 16/9; }
+  .article-image.square { aspect-ratio: 1; }
+  .article-image-placeholder {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    text-align: center;
+    padding: 40px 24px;
+  }
+  .article-image-caption {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 44px;
+    text-align: center;
+  }
+
+  /* cross-reference link */
+  .xref {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--peach-deep);
+    text-decoration: none;
+    border-bottom: 1px solid var(--peach);
+    transition: border-color .2s;
+  }
+  .xref:hover { border-color: var(--peach-deep); }
+
+  /* ── ARTICLE NAV ── */
+  .article-nav-link {
+    display: flex;
+    align-items: center;
+    padding: 32px 48px;
+    text-decoration: none;
+    transition: background .2s;
+    gap: 20px;
+    border-top: 1px solid var(--rule);
+  }
+  .article-nav-link:hover { background: var(--blush); }
+  .article-nav-link.next { justify-content: flex-end; border-top: none; }
+  .nav-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .nav-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .nav-title.right { text-align: right; }
+  .nav-arrow { font-size: 24px; color: var(--peach-deep); flex-shrink: 0; }
+
+  /* ── ARTICLE FOOTER ── */
+  .article-footer {
+    background: var(--blush);
+    border-top: 2px solid var(--ink);
+    padding: 52px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .article-footer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 8px;
+  }
+  .article-footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--ink);
+  }
+  .article-footer-name em { font-style: italic; color: var(--peach-deep); }
+  .article-footer-links {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .footer-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .footer-link:hover { color: var(--peach-deep); }
+  .footer-link-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--parchment);
+    background: var(--ink);
+    padding: 8px 18px;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .footer-link-btn:hover { background: var(--peach-deep); }
+
+  @media (max-width: 640px) {
+    .site-nav { padding: 12px 20px; }
+    .article-header { padding: 48px 24px 36px; }
+    .article-body { padding: 40px 24px 60px; }
+    .article-footer { padding: 40px 24px; }
+    .article-nav-link { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SITE NAV -->
+<nav class="site-nav">
+  <a href="index.html" class="site-nav-back">← Back to Portfolio</a>
+  <a href="index.html" class="site-nav-name">Chloe Oriotis</a>
+</nav>
+
+<!-- ARTICLE HEADER -->
+<header class="article-header">
+  <span class="article-tag">Essay</span>
+  <h1 class="article-title">A Brief Defence of<br>the <em>Bird Brain</em></h1>
+  <p class="article-dek">And why you should hire Tweety as your next R&D engineer.</p>
+  <div class="article-meta">
+    <span class="article-byline"><strong>Chloe Oriotis</strong></span>
+    <div class="article-dot"></div>
+    <span class="article-byline">~10 min read</span>
+    <div class="article-dot"></div>
+    <span class="article-byline" id="pub-date">2026</span>
+  </div>
+</header>
+
+<!-- ARTICLE BODY -->
+<!--
+  HOW TO USE THIS TEMPLATE:
+  ─────────────────────────
+  • One <p> tag per paragraph
+  • Bird section headings: <h2>The <em>Peregrine Falcon</em></h2>
+  • Math block: use .math-block div (see example below)
+  • Pull quote: <div class="pull-quote">Your best line.</div>
+  • Images: use .article-image with .landscape / .portrait / .square modifier
+  • Shinkansen photo: .article-image.landscape — replace placeholder with <img src="photos/shinkansen.jpg" alt="...">
+  • Cross-reference: <a href="ontheroad.html" class="xref">Lessons Learned on the Road</a>
+-->
+<main class="article-body">
+
+  <p>Middle School Chloe had a bird phase. Middle School Chloe also didn't have many friends. Coincidence? Maybe.</p>
+<p>But, Middle School Chloe knew things that the popular kids didn’t. Like how birds are amazing at adapting to their environments; after all, they have been designing and testing for tens of millions of years. It’s not really a hypothesis anymore that birds evolved from dinosaurs, it’s a solid scientific fact. My favourite bit of visible proof is the talons on larger raptors (birds of prey). If those don’t look like dinosaur claws, you need a rewatch of Jurassic Park; Dr. Alan Grant will set you straight in the first five minutes. Of course, there’s paleontological evidence, like feather imprints on juvenile Tyrannosaur fossils and the A-lister Archaopteryx, but I’ll take any excuse to rewatch that masterpiece.
+</p>
+<p>Compared to birds, humans are just catching up. Biomimicry is what us engineers call it, and I like the deference it gives to the animals who’ve spent eons getting the designs right. My favourite examples involve the wings and beaks of two incredible birds who have dominated their niches so well that engineers couldn’t help but take notice.
+</p>
+<p>Let’s start with the tiny but mighty <em>peregrine falcon</em>. I love this raptor because of its unique style of hunting: bludgeoning, with its balled-up feet, from the air, at top speeds of over 300 kilometres per hour. If this attack, called a stoop, didn’t immediately kill its prey, no problem! The peregrine falcon will swing back around, snatch its stunned prey and deal with them the old fashioned way. 
+</p>
+
+<div class="article-image landscape">
+  <img src="peregrine.jpg" alt="A peregrine falcon">
+</div>
+<p class="article-image-caption">The Peregrine Falcon in a Stoop</p>
+
+<p>I'm going to get mathy for a moment to truly convey how impressive this is. Assuming the average falcon weighs 1 kg, we can roughly calculate the force of its impact to be:
+  </p>
+  <!-- PASTE FULL ARTICLE HERE -->
+
+  <!-- MATH BLOCK EXAMPLE — for the falcon force calculation: -->
+  
+  <div class="math-block">
+    <span class="math-label">Force calculation — peregrine falcon stoop</span>
+    F<sub>avg</sub> = (½)(m)(v²) / d<br><br>
+    m = mass = 1 kg <br>
+    v = velocity (or, speed) = 300 km/h = 83 m/s <br>
+    d = impact distance = 1 m (this varies, but let’s assume 1 m for simplicity)<br><br>
+    F<sub>avg</sub> = (½)(1)(83²) / 1 ≈ 3,445 N ≈ 775 lbf
+  </div>
+ 
+  <p>Based on the above, this bird whacks its prey with around 775 pounds of force. That’s like someone dropping 100 bricks on your head (or 40 Dachshunds, if dogs are your preferred frame of reference). All from a bird the size of a crow!
+    </p>
+  <p>So what gives this bird the audacity to be such a lethal killer? The most impactful element of the force equation is velocity. Which, in our case, happens to be the largest number in the equation by far. 300 km/h is insanely fast. Cheetahs run at 113 km/h, and highway speeds in Canada are a smidge faster than that. Peregrine falcons dive at speeds double this, all because of their anatomy. 
+    </p>
+  <p>The falcons essentially tuck their wings and smooth out their feathers to become as aerodynamic as possible. During a stoop, wind is pierced neatly by their narrow, sharp beaks, and the smoothness of their bodies gradually widens and tapers (like a raindrop) to guide the wind around them in a streamlined way. With such little turbulence, the falcons can quickly reach these incredibly high speeds.
+    </p>
+  <p>
+    They do of course still need to steer, which is why they only fold their wings halfway, creating a triangular-shaped flying speed demon. In the aerospace engineering world, this would be akin to a flying wing aircraft. When someone imagines an airplane, they will probably conjure images of the tube-like body where the people go with two tapered wings on either side. A flying wing airplane looks more triangular in shape, where the distinction between the body and the wings isn’t cleanly defined. 
+    </p>
+
+    <div class="article-image landscape">
+      <img src="flyingwing.jpg" alt="A flying wing aircraft">
+    </div>
+    <p class="article-image-caption">A flying wing aircraft</p>
+    
+  <p>The wings blend into the nose, and the body looks flattened and stretches to meet the wings, nearly to the tips. When compared to a peregrine falcon’s stoop position, things look similar.
+    </p>
+  <p>In theory, a flying wing is the most aerodynamically efficient type of aircraft. In the bird world, this translates to incredible speed. But when practical considerations are taken, like steering, the flying wing cannot compete with standard aircraft. An addition of a tail, like the falcon’s, could help, but then the efficiency would be reduced. 
+    </p>
+  <p>Aerodynamic design often feels like a constant give-and-take, this catching-up loop that’s impossible to break into, or break free from. This is where the <em>engineering design cycle</em> can be used to establish the best point to stop. It looks like this: have an idea, test it, fix some of the issues, and go at it again. Repeat until the ideas turn into the perfect design.
+    </p>
+  <p>That was a trick, of course, since the perfect design is impossible to achieve. So in the case of aircraft design, certain goals must be defined and used as finish lines. Sure, the aircraft could be slightly more aerodynamically efficient. But if it costs a ton of resources (time, money) and takes away from goals already achieved (great steering control, for example), then it might not be worth it. That’s when the design cycle stops.
+    </p>
+  <p>The peregrine falcon doesn’t know about the engineering design cycle, but evolution has been doing it for them anyway. The most valuable resource to evolution is time, and millions of years has been enough for it to develop record-holding physical abilities in birds like the peregrine falcon.
+    </p>
+  <p>So while the peregrine falcon was an undocumented inspiration to hyper-efficient aircraft design, there are other birds that have directly impacted the daily lives of people for many years. Let’s talk about the <em>kingfisher</em>.
+    </p>
+
+    <div class="article-image landscape">
+      <img src="kingfisher.jpg" alt="A kingfisher">
+    </div>
+    <p class="article-image-caption">A kingfisher scanning its pond for lunch</p>
+        
+  <p>Kingfishers are a very distinguishable bird. You can almost always tell you’re looking at one because of its compact body and its comparatively massive, spike-like beak. As the name suggests, they specialize in hunting fish. As the name also suggests, they’re pretty great at it.
+    </p>
+  <p>Similar to the peregrine falcon, kingfishers hunt from above. But instead of keeping its dives in the skies, the kingfisher dives into ponds, lakes, rivers, and oceans to nab its dinner. This is impressive, and worth taking note of, for a few reasons.
+    </p>
+  <p>
+    Water and air are <em>fluids</em>. One’s a liquid and one’s a gas, but both are able to be moved through, unlike a solid. Air is obviously much easier to move through, and that’s because its particles (oxygen, nitrogen, and plenty others) are bouncing around with lots of space between them. Water provides more resistance because its particles (H2O) are happy to be close together and slide against each other. This also explains why gases can be compressed, and when they do, their particles are forced against their will to get closer to one another. It causes an increase in pressure as the particles do their best to regain their personal space. 
+    </p>
+  <p>This concept forms the basis of <em>pneumatics</em>. In real life, this could look like a plunger pushing in a cylinder compressing a gas through a long, thin tube, to push out another plunger in a cylinder on the other side. This is a useful phenomenon for designing things like heavy machinery. But it also creates some problems in other areas of the engineering world.
+    </p>
+  <p>
+    In Japan lives an incredibly high-speed rail system. These “bullet trains”, or <em>shinkansen</em>, travel up to 320 km/h. It’s just another Tuesday for the peregrine falcon, but that’s 200 km/h faster than standard trains around the world. I rode the shinkansen on my trip to Japan this spring, and I was surprised by the amount of tunnels the train zoomed through. These tunnels actually proved to be a difficult engineering challenge during the design of these train systems.
+    </p>
+  <p>Imagine, in this scenario, a standard flat-nosed train flying at hundreds of kilometres an hour through a tunnel in the mountains. It would look pretty similar to a plunger in a cylinder, and as we know, when a plunger pushes gas through a cylinder, it compresses it and moves the force out the cylinder at the other end. On a much bigger scale, the train acts like the plunger and the tunnel like the cylinder. 
+    </p>
+  <p>But this isn’t meant to be a pneumatic system. With the train building up so much force in the form of air pressure as it moved so fast through the tunnel, it resulted in a massive booming sound as it exited on the other side. This shockwave was so strong that it disturbed wildlife and humans living nearby, and was capable of damaging infrastructures.
+    </p>
+  <p>So the Japanese engineers had a problem they couldn’t iterate through in their engineering design cycle. Cue the kingfisher.
+    </p>
+  <p>When the birds hunt for fish, the only way they don’t harm themselves on entry to the water is by going in beak-first. Kingfishers use their long, pointed beaks to gradually guide the water around their heads and bodies, much like a peregrine falcon does to the air while hunting in a stoop. They are both streamlined. So what did the Japanese engineers do when they realized kingfishers solved this problem millenia ago? 
+    </p>
+  <p>They gave their shinkansen beaks, too.
+    </p>
+  <p>Now, when the high-speed trains fly through tunnels, they act less as a plunger and more like fluid-piercing spikes. No more booming shockwaves when they exit, because the air isn’t pushed through the tunnel like it had been before. It’s safely guided around the beak-like nose of the train like the water is guided around the body of the kingfisher. And as a bonus, it made the shinkansen both faster and more efficient. Win, win, win.
+    </p>
+  <p>
+    So, yes, Middle School Chloe was a bird nerd. She’d probably be proud to know Current Chloe is an engineer who still loves them enough to recognize how influential they are to her profession (and to know she has plenty of friends, despite this). Biomimicry is a fascinating science that we still have so much to learn from, because there’s not much that can beat tens of millions of years of ideation, testing, and repeating. Not so bird-brained after all!
+    </p>
+
+
+<!-- SHINKANSEN PHOTO — replace placeholder when ready: -->
+  
+  <div class="article-image landscape">
+    <img src="shinkansen.jpg" alt="Chloe with the shinkansen">
+  </div>
+  <p class="article-image-caption">I got a wave from the conductor!</p>
+ 
+
+  <!-- PULL QUOTE EXAMPLE — use for "They gave their shinkansen beaks, too." section: -->
+  <!-- <div class="pull-quote">They gave their shinkansen beaks, too.</div> -->
+
+</main>
+
+<!-- ARTICLE NAVIGATION -->
+<a class="article-nav-link" href="ontheroad.html">
+  <span class="nav-arrow">←</span>
+  <div>
+    <span class="nav-label">Previous Essay</span>
+    <span class="nav-title">Lessons Learned While Working on the Road</span>
+  </div>
+</a>
+
+<!-- ARTICLE FOOTER -->
+<footer class="article-footer">
+  <div>
+    <p class="article-footer-label">Written by</p>
+    <p class="article-footer-name">Chloe <em>Oriotis</em></p>
+  </div>
+  <div class="article-footer-links">
+    <a href="index.html#writing" class="footer-link">All writing</a>
+    <a href="index.html#about" class="footer-link">About</a>
+    <a href="mailto:chloe.oriotis@gmail.com" class="footer-link">Get in touch</a>
+    <a href="Chloe_Oriotis_Resume_2026.pdf" download class="footer-link-btn">Download Résumé ↓</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('pub-date').textContent =
+    new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+</script>
+</body>
+</html>
